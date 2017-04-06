@@ -1,0 +1,282 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>视光中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/weui.css" />
+    <link rel="stylesheet" type="text/css" href="css/example.css" />
+</head>
+<style type="text/css">
+.content-top {
+    width: 100%;
+    height: 3rem;
+}
+
+.content-top-search {
+    float: left;
+    width: 90%;
+    height: 2.5rem;
+    padding-top: 0.5rem;
+}
+
+.content-top-search-div {
+    width: 80%;
+    height: 2rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #4c4c4c;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-top-search-div-ss {
+    float: left;
+    width: 10%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    margin: 0 3% 0 1%;
+    font-size: 1.1rem;
+}
+
+.content-top-search input {
+    width: 100%;
+    height: 2rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    border: 0;
+    padding-left: 2.4rem;
+}
+
+.content-top-search img {
+    width: auto;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    z-index: 9999;
+    position: relative;
+    top: -1.8rem;
+}
+
+.content-top-collection {
+    float: left;
+    width: 10%;
+    height: 2.5rem;
+    padding-top: 0.5rem;
+}
+
+.content-top-collection img {
+    width: auto;
+    height: 1.8rem;
+}
+
+.content-mid {
+    width: 100%;
+    height: 80px;
+    background: #FFFFFF;
+    margin-bottom: 1px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.line-weight {
+    width: 100%;
+    height: 7px;
+    background: #eaeaea;
+}
+
+.list-left {
+    padding: 3%;
+    float: left;
+    width: 14%;
+}
+
+.list-pic {
+    width: 90%;
+    height: auto;
+}
+
+.list-mid {
+    float: left;
+    width: 44%;
+    padding: 3% 3% 3% 3%;
+    font-size: 18px;
+}
+
+.list-right {
+    float: left;
+    padding: 3%;
+    width: 24%;
+}
+
+.list-png {
+    float: right;
+    width: 40%;
+    height: auto;
+    margin-right: 5px;
+}
+
+.list-bot {
+    width: 94%;
+    padding: 3%;
+    background: #FFFFFF;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.list-bot span {
+    color: #2484fb;
+}
+
+.list-bot a {
+    color: #333;
+}
+
+.clear {
+    clear: both;
+}
+
+.weui-search-bar__box {
+    height: 1.8rem;
+    line-height: 1.8rem
+}
+
+.star {
+    padding-left: 5px;
+}
+
+._img {
+    display: block;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    padding-left: 2px;
+}
+
+.collect {
+    display: block;
+    font-size: 10px;
+}
+
+
+/*.weui-search-bar__label{line-height: 1.8rem;}*/
+
+
+/*.weui-search-bar__input{font-size: 1.8rem}*/
+</style>
+<script type="text/javascript">
+function addStr(storeNo) {
+    window.location.href = "opc!bindStr?storeNo=" + storeNo;
+}
+
+function collection() {
+    window.location.href = "opc!collection";
+}
+
+function navigation() {
+    window.location.href = "opc!navigation";
+}
+//    function enter()
+//    {
+//        var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+//        if (keyCode == 13)
+//        {
+//            window.location.href = "pt!opcPage?stName="+$("#searchWord").val();
+//        }
+//    }
+//    function search(){
+//        window.location.href = "pt!opcPage?stName="+$("#searchWord").val();
+//    }
+$(function() {
+    var $searchBar = $('#searchBar'),
+        $searchResult = $('#searchResult'),
+        $searchText = $('#searchText'),
+        $searchInput = $('#searchInput');
+
+    function hideSearchResult() {
+        $searchResult.hide();
+        $searchInput.val('');
+    }
+
+    function cancelSearch() {
+        hideSearchResult();
+        $searchBar.removeClass('weui-search-bar_focusing');
+        $searchText.show();
+    }
+
+    $searchText.on('click', function() {
+        $searchBar.addClass('weui-search-bar_focusing');
+        $searchInput.focus();
+    });
+    $searchInput
+        .on('blur', function() {
+            if (!this.value.length) cancelSearch();
+        })
+        .on('input', function() {
+            if (this.value.length) {
+                $searchResult.show();
+            } else {
+                $searchResult.hide();
+            }
+        });
+});
+</script>
+
+<body>
+    <div class="page__bd">
+        <div class="weui-search-bar" id="searchBar">
+            <form action="#" class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" name="stName" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+            <div class="star">
+                <img onclick="collection()" class="_img" src="images/collection.png">
+                <span class="collect">收藏</span>
+            </div>
+        </div>
+    </div>
+    <div class="content-mid">
+        <div class="list-left">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid">视光中心</div>
+        <div class="list-right">
+            <img src="images/glassesShop_collection.png" onclick="addStr()" class="list-png">
+            <img src="images/glassesShop_navigation.png" onclick="navigation()" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot"><span>电话：18521035616</span>
+        <br/><a href="tel:${a.phone}">地址：西园四路2号</a></div>
+    <div class="line-weight"></div>
+    <div class="content-mid">
+        <div class="list-left">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid">视光中心</div>
+        <div class="list-right">
+            <img src="images/glassesShop_collection.png" onclick="addStr()" class="list-png">
+            <img src="images/glassesShop_navigation.png" onclick="navigation()" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot"><span>电话：18521035616</span>
+        <br/><a href="tel:${a.phone}">地址：西园四路2号</a></div>
+    <div class="line-weight"></div>
+</body>
+
+</html>

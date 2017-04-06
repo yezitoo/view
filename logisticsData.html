@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>物流详情</title>
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    font-family: 微软雅黑;
+    font-size:12px;
+    color:#333;
+}
+
+ul {
+    width: 90%;
+    margin: 0 auto;
+    border-left: 1px solid #d6d3d3;
+    position: relative;
+    margin-top: 33px;
+}
+
+ul li {
+    width: 100%;
+    list-style: none;
+    height: 65px;
+    box-sizing: border-box;
+    padding: 0px 0px;
+}
+
+.bright {
+    width: 10%;
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff3366;
+    margin-left: 10px;
+    position: absolute;
+    left: -15px;
+    box-shadow: 0px 0px 10px #ff3366;
+}
+
+.dark {
+    width: 8px;
+    float: left;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d6d3d3;
+    margin-left: 10px;
+    position: absolute;
+    left: -14px;
+}
+.dark_bottom{
+	width: 8px;
+    float: left;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #d6d3d3;
+    margin-left: 10px;
+    position: absolute;
+    left: -14px;
+}
+.time {
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding-left: 12px;
+}
+
+.details {
+    width: 65%;
+    float: right;
+
+}
+
+ul li:first-child .details {
+    color: #ff3366;
+}
+.tel{
+	color:#2484fb;
+}
+.container_bottom{
+	height:65px;
+	width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+.time_bottom{
+    width: 25%;
+    float: left;
+    text-align: center;
+    padding-left: 12px; 
+}
+.details_bottom{
+	width: 65%;
+    float: right;
+}
+</style>
+
+<body>
+    <div class="container">
+        <ul>
+            <li>
+                <div class="bright"></div>
+                <div class="time">
+                    <p>16:00</p>
+                    <p>2017/3/6</p>
+                </div>
+                <div class="details">已签收，感谢使用顺丰，期待再次为您服务</div>
+            </li>
+            <li>
+                <div class="dark"></div>
+                <div class="time">
+                    <p>16:00</p>
+                    <p>2017/3/6</p>
+                </div>
+                <div class="details">正在派送，请您准备查收（派送员：王三，电话：<span class="tel">11111111111</span> ）</div>
+            </li>
+            <li>
+                <div class="dark"></div>
+                <div class="time">
+                    <p>16:00</p>
+                    <p>2017/3/6</p>
+                </div>
+                <div class="details">已签收，感谢使用顺丰，期待再次为您服务</div>
+            </li>
+            <li>
+                <div class="dark"></div>
+                <div class="time">
+                    <p>16:00</p>
+                    <p>2017/3/6</p>
+                </div>
+                <div class="details">已签收，感谢使用顺丰，期待再次为您服务</div>
+            </li>
+            <li>
+                <div class="dark"></div>
+                <div class="time">
+                    <p>16:00</p>
+                    <p>2017/3/6</p>
+                </div>
+                <div class="details">已签收，感谢使用顺丰，期待再次为您服务</div>
+            </li>
+        </ul>
+        <div class="container_bottom">
+        	<div class="dark_bottom"></div>
+        	<div class="time_bottom"><p>12:43</p><p>2017/3/1</p></div>
+        	<div class="details_bottom">包裹正在等待揽收</div>
+        </div>
+        
+    </div>
+</body>
+
+</html>

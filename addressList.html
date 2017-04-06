@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>地址清单</title>
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #eeeeee;
+}
+
+.container2 {
+    height: 100%;
+    font-size: 12px;
+    color: #333;
+}
+
+.address-list1 {
+    margin: 0 auto;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.address-list1 p:first-child {
+    margin-bottom: 10px;
+}
+
+.tel-num {
+    margin-left: 20px;
+}
+
+.address-list2 {
+    margin-top: 1px;
+    background-color: #fff;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.list2-left,
+.list2-right {
+    width: 45%;
+    float: left;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.division {
+    width: 10%;
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    color:#999;
+}
+
+.list2-left span,
+.list2-right span {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    color: #999;
+    margin-left:11px;
+}
+
+
+.list2-left img,
+.list2-right img {
+    width: 20px;
+    height: 20px;
+}
+
+.address-list3 {
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.address-list3 p:first-child {
+    margin-bottom: 10px;
+}
+
+footer {
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+}
+.container2 form{
+    text-align:center;
+}
+#new-add {
+    padding: 15px 42px;
+    background-color: #ff3366;
+    margin: 10px auto;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    border:none;
+}
+.empty{
+    height:80px;
+}
+</style>
+
+<body>
+
+    <div class="container2">
+        <article>
+            <div class="address-list1">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+            <div class="address-list3">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+            <div class="address-list1">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+            <div class="address-list3">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+            <div class="address-list1">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+            <div class="address-list3">
+                <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="address-list2">
+                <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                <div class="division">|</div>
+                <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+            </div>
+        </article>
+        <div class="empty"></div>
+        <footer>
+            <form>
+                <input type="button" value="新增收货地址" id="new-add" />
+            </form>
+        </footer>
+    </div>
+</body>
+
+</html>

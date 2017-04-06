@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <title>检查结果录入</title>
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    font-family: 微软雅黑;
+    color: #333;
+    font-size: 12px;
+}
+
+.mes {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+    color: #2484fb;
+    padding: 15px 0px;
+}
+
+.line-light {
+    width: 100%;
+    height: 1px;
+    background-color: #999;
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+    height: 112px;
+}
+
+p {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+form input,
+select {
+    outline: none;
+   
+    border: 1px solid #999;
+    margin-top: 15px;
+    box-sizing: border-box;
+    /*padding:8px 20px;*/
+    margin-left:9px;
+}
+
+#name {
+    padding-left: 36px;
+    width: 110px;
+    height: 35px;
+}
+#bir{
+     width: 110px;
+    height: 35px;
+}
+#age {
+    padding-left: 38px;
+    width: 80px;
+    height: 35px;
+}
+
+#sex {
+    padding-left: 30px;
+    width: 80px;
+    height: 35px;
+}
+
+.line-weight {
+    width: 100%;
+    height: 8px;
+    background-color: #eee;
+}
+
+.check-date {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.check-date input {
+    width: 120px;
+    height: 40px;
+    border: 1px solid #999;
+    margin: 15px 0px;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid #999;
+    margin-top: 15px;
+}
+
+td {
+    height: 40px;
+    width:33.3%;
+}
+td:focus{
+    outline:none;
+}
+.save {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #2484fb;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.save button {
+    width: 100%;
+    background-color: #2484fb;
+    padding: 15px 0px;
+    color: white;
+    font-size: 16px;
+    border: 0;
+}
+#edit1{
+    width:100%;
+    height:100%;
+    border:0;
+    outline:none;
+    background-color:#eee;
+    text-align:center;
+}
+#edit2{
+    width:100%;
+    height:100%;
+    border:0;
+    outline:none;
+    text-align:center;
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="mes">检查结果录入</div>
+        <div class="line-light"></div>
+        <div class="check-date">
+            <label>检查日期：
+                <input type="date">
+            </label>
+        </div>
+        <div class="line-weight"></div>
+        <form>
+            <p>
+                <label>姓名：
+                    <input type="text" id="name">
+                </label>
+                <label>性别：
+                    <select type="text" id="sex">
+                        <option value="">男</option>
+                        <option value="">女</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label>生日：
+                    <input type="date" id="bir">
+                </label>
+                <label>年龄：
+                    <input type="text" readonly id="age">
+                </label>
+            </p>
+        </form>
+        
+        <table border="0" rules=cols>
+            <tr bgcolor="#0fcdd9">
+                <td>项目</td>
+                <td>项目结果（R）</td>
+                <td>项目结果（L）</td>
+            </tr>
+            <tr bgcolor="#eee">
+                <td>散瞳前验光值</td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+            </tr>
+            <tr>
+                <td>裸眼视力</td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+            </tr>
+            <tr bgcolor="#eee">
+                <td>裂痕灯检查</td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+            </tr>
+            <tr>
+                <td>眼轴长度</td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+            </tr>
+            <tr bgcolor="#eee">
+                <td>散瞳后验光值</td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+                <td contentEditable="true"><input type="text" id="edit1"></td>
+            </tr>
+            <tr>
+                <td>最佳矫正视力</td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+                <td contentEditable="true"><input type="text" id="edit2"></td>
+            </tr>
+        </table>
+        <div class="save">
+            <button>保存</button>
+        </div>
+    </div>
+    <script>
+    var bir = document.getElementById("bir");
+    var age = document.getElementById("age");
+    bir.onchange = function(e) {
+        var birDate = e.target.value;
+        var now = new Date();
+        // console.log(birDate);
+        // console.log(parseInt(birDate));
+        // console.log(now.getFullYear());
+        age.value = now.getFullYear() - parseInt(birDate);
+    }
+    </script>
+</body>
+
+</html>

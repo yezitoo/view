@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>确认订单</title>
+    <link rel="stylesheet" href="css/sm.min.css">
+</head>
+<style type=text/css>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background: #eeeeee;
+}
+
+
+/*确认订单*/
+
+.container1 header {
+    height: 100px;
+    background: white;
+}
+
+.container1 {
+    font-family: 微软雅黑;
+    font-size: 12px;
+    /*background: #eaedf2;*/
+    height: 100%;
+    overflow: hidden;
+    color: #333;
+    display: block;
+}
+
+.container1 .header_left {
+    float: left;
+    width: 76%;
+    height: 44px;
+    padding: 25px 7.5px;
+}
+
+.address {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 10px;
+}
+
+.container1 .header_right {
+    float: right;
+    width: 10%;
+    font-size: 27px;
+    text-align: right;
+    padding: 32px 6px;
+}
+
+.line-weight {
+    width: 100%;
+    height: 5px;
+    /* background: #eaedf2;*/
+}
+
+.line-light {
+    width: 100%;
+    height: 1px;
+    /*background: #eaedf2;*/
+}
+
+.order_infor {
+    width: 100%;
+    height: 110px;
+    padding: 5px 7.5px;
+    background-color: white;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.order_infor_left {
+    float: left;
+    width: 32%;
+}
+
+.order_infor_left img {
+    float: left;
+    width: 100px;
+    height: 100px;
+}
+
+.order_infor_middle {
+    float: left;
+    width: 55%;
+    margin-left: 7.5px;
+}
+
+.order_infor_plan {
+    font-size: 16px;
+}
+
+.order_infor_middle_bottom {
+    margin-top: 24px;
+    color: #666;
+}
+
+.order_infor_right {
+    float: left;
+    width: 15%;
+    text-align: right;
+}
+
+.discount,
+.total {
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    padding: 5px 7.5px;
+    background-color: white;
+}
+
+.discount span {
+    color: #ff3366;
+}
+
+.total span {
+    font-size: 20px;
+    /*   color: #ff3366;*/
+}
+
+.pay {
+    width: 100%;
+    padding: 5px 7.5px;
+    height: 40px;
+    line-height: 40px;
+    background-color: white;
+}
+
+.pay_left {
+    float: left;
+    width: 30%;
+}
+
+.pay_middle {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+
+.pay_right {
+    float: left;
+    width: 16%;
+    text-align: right;
+    padding-right: 7.5px;
+}
+
+.pay_btn {
+    width: 100%;
+    height: 58px;
+    line-height: 58px;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: white;
+}
+
+.pay_btn_left {
+    float: left;
+    margin-left: 16px;
+}
+
+.pay_btn_middle {
+    float: left;
+    margin-left: 10px;
+    font-size: 20px;
+    color: #ff3366;
+}
+
+.pay_btn_right {
+    width: 40%;
+    float: right;
+    color: white;
+    background-color: #2484fb;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+/*地址清单*/
+
+.container2 {
+    height: 100%;
+    font-size: 12px;
+    color: #333;
+    display: none;
+    padding-bottom: 500px;
+    min-height: 100%;
+}
+
+.address-list1 {
+    margin: 0 auto;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.address-list1 p:first-child {
+    margin-bottom: 10px;
+}
+
+.tel-num {
+    margin-left: 20px;
+}
+
+.address-list2 {
+    margin-top: 1px;
+    background-color: #fff;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.list2-left,
+.list2-right {
+    width: 45%;
+    float: left;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.division {
+    width: 10%;
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 16px;
+    color: #999;
+}
+
+.list2-left span,
+.list2-right span {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    color: #999;
+    margin-left: 11px;
+}
+
+.list2-left img,
+.list2-right img {
+    width: 20px;
+    height: 20px;
+}
+
+.container2 footer {
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+}
+
+.container2 form {
+    text-align: center;
+}
+
+#new-add {
+    padding: 15px 42px;
+    background-color: #ff3366;
+    margin: 10px auto;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+
+.line-weight {
+    width: 100%;
+    height: 5px;
+}
+
+.empty{
+    width:100%;
+    height:80px;
+}
+/*新增地址*/
+
+.container3 {
+    font-size: 16px;
+    background-color: #fff;
+    height: 100%;
+    color: 微软雅黑;
+    display: none;
+}
+
+.container3 label {
+    position: relative;
+}
+
+.container3 form input,
+button {
+    width: 90%;
+    height: 40px;
+    margin: 10px 18px;
+    padding-left: 15px;
+    border: 1px solid #999999;
+    box-sizing: border-box;
+    outline: none;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+#save {
+    background-color: #2484fb;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    padding-left: 0px;
+}
+#cancel{
+    background-color: #eeeeee;
+    text-align: center;
+    font-size: 16px;
+    padding-left: 0px;
+}
+
+@font-face {
+    font-family: "iconfont";
+    src: url('iconfont_address/iconfont.eot?t=1488853456415');
+    /* IE9*/
+    src: url('iconfont_address/iconfont.eot?t=1488853456415#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont_address/iconfont.woff?t=1488853456415') format('woff'), /* chrome, firefox */
+    url('iconfont_address/iconfont.ttf?t=1488853456415') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('iconfont_address/iconfont.svg?t=1488853456415#iconfont') format('svg');
+    /* iOS 4.1- */
+}
+
+.choice1 {
+    font-family: "iconfont" !important;
+    font-size: 26px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #c1c1c1;
+    position: absolute;
+    right: 8%;
+    top: -40%;
+    display: block;
+}
+
+.choice2 {
+    font-family: "iconfont" !important;
+    font-size: 25px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2484fb;
+    position: absolute;
+    right: 8%;
+    top: -40%;
+    display: none;
+}
+
+#distpicker1 {
+    width: 90%;
+    height: 40px;
+    margin: 10px 18px;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+#distpicker1 select {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.bar .button.pull-right {
+    text-align: right;
+}
+</style>
+
+<body>
+    <!-- 确认订单 -->
+    <div class="container1">
+        <header>
+            <div class="header_left">
+                <p>收件人：xxxx 11111111111</p>
+                <p class="address">地址：杭州市西湖区西园四路2号浙大创新院</p>
+            </div>
+            <div class="header_right">
+                <span>
+                >
+            </span>
+            </div>
+        </header>
+        <article>
+            <div class="line-weight"></div>
+            <div class="order_infor">
+                <div class="order_infor_left">
+                    <img src="images/20170306150606.png">
+                </div>
+                <div class="order_infor_middle">
+                    <p class="order_infor_plan">视界镜片阳光计划A</p>
+                    <p class="order_infor_middle_bottom">
+                        左眼光度100；右眼光度100；左眼4盒；右眼0盒
+                    </p>
+                </div>
+                <div class="order_infor_right">
+                    <p>￥0.01</p>
+                    <p>x3</p>
+                </div>
+            </div>
+            <div class="line-weight"></div>
+            <div class="discount">
+                优惠金额：<span>-￥0.01</span>
+            </div>
+            <div class="line-light"></div>
+            <div class="total">
+                共4件商品 合计<span>￥0.03</span>
+            </div>
+            <div class="line-weight"></div>
+            <div class="pay"><span class="pay_left">支付方式</span><span class="pay_middle">在线支付</span><span class="pay_right">></span></div>
+        </article>
+        <footer>
+            <div class="pay_btn">
+                <span class="pay_btn_left">实付</span><span class="pay_btn_middle">￥0.03</span><span class="pay_btn_right">支付</span>
+            </div>
+        </footer>
+    </div>
+    <!-- 地址清单 -->
+    <div class="container2">
+        <article>
+            <div>
+                <div class="address-list1">
+                    <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                    <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+                </div>
+                <div class="address-list2">
+                    <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                    <div class="division">|</div>
+                    <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+                </div>
+            </div>
+            <div class="line-weight"></div>
+            <div>
+                <div class="address-list1">
+                    <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                    <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+                </div>
+                <div class="address-list2">
+                    <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                    <div class="division">|</div>
+                    <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+                </div>
+            </div>
+            <div class="line-weight"></div>
+            <div>
+                <div class="address-list1">
+                    <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                    <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+                </div>
+                <div class="address-list2">
+                    <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                    <div class="division">|</div>
+                    <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+                </div>
+            </div>
+            <div class="line-weight"></div>
+            <div>
+                <div class="address-list1">
+                    <p><span>收件人：张三</span><span class="tel-num">11111111111</span></p>
+                    <p>浙江省杭州市西湖区西园四路2号浙大创新院</p>
+                </div>
+                <div class="address-list2">
+                    <div class="list2-left"><img src="images/myAddress_list_edit.png"><span>编辑</span></div>
+                    <div class="division">|</div>
+                    <div class="list2-right"><img src="images/myAddress_list_delete.png"><span>删除</span></div>
+                </div>
+            </div>
+        </article>
+        <div class="empty"></div>
+        <footer>
+            <form>
+                <input type="button" value="新增收货地址" id="new-add" />
+            </form>
+        </footer>
+    </div>
+    <!-- 新增地址 -->
+    <div class="container3">
+        <form>
+            <label>
+                <input type="text" placeholder="姓名" maxlength="5" id="name">
+            </label>
+            <label class="tel">
+                <input type="tel" placeholder="手机号码" id="tel">
+            </label>
+            <input id="city-picker" type="text" readonly="" name="input_area" placeholder="城市选择" />
+            <label>
+                <input type="text" placeholder="详细地址" id="address-detail">
+            </label>
+            <label>
+                <input type="text" value="设为默认地址" id="choice_address" readonly><i class="choice1">&#xe75d;</i>
+                <i class="choice2">&#xe6cd;</i></label>
+            <label>
+                <button id="save">保存</button>
+                <button id="cancel">返回</button>
+            </label>
+        </form>
+    </div>
+    <!-- js新增地址 -->
+    <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/city-picker.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    $(".container1 header").click(function() {
+        $(".container1").css({
+            "display": "none"
+        });
+        $(".container2").css({
+            "display": "block"
+        });
+        $(".container3").css({
+            "display": "none"
+        });
+    })
+
+    $("#new-add,.list2-left").click(function() {
+        $(".container1").css({
+            "display": "none"
+        });
+        $(".container2").css({
+            "display": "none"
+        });
+        $(".container3").css({
+            "display": "block"
+        });
+    })
+
+
+    $(".address-list1").click(function() {
+        $(".container1").css({
+            "display": "block"
+        });
+        $(".container2").css({
+            "display": "none"
+        });
+        $(".container3").css({
+            "display": "none"
+        });
+    })
+
+    $(".list2-right").click(function(){
+      $(this).parent().parent().remove();
+    })
+    $(".choice1").click(function() {
+        // $(".choice1").hide();
+        // $(".choice2").show();
+        $(".choice1").css({
+            "display": "none"
+        });
+        $(".choice2").css({
+            "display": "block"
+        })
+    })
+    $(".choice2").click(function() {
+            // $(".choice2").hide();
+            // $(".choice1").show();
+            $(".choice1").css({
+                "display": "block"
+            });
+            $(".choice2").css({
+                "display": "none"
+            })
+        })
+        // debugger
+    $("#tel").on("change", function() {
+        var phone = $("#tel").val();
+        if (!(/^1[34578]\d{9}$/.test(phone))) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("#save").before('<p style="color:red;font-size:12px;width:90%;margin:0 auto" class="notice">手机号输入有误，请重填</p>');
+            $(this).val("");
+
+        } else {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        }
+    })
+
+    $("#save").click(function() {
+        if (!($("#name").val() && $("#tel").val() && $("#city-picker").val() && $("#address-detail").val())) {
+            if ($(".notice")) {
+                $(".notice").remove();
+                $("#save").before('<p style="color:red;font-size:12px;width:90%;margin:0 auto" class="notice">输入框不能为空</p>')
+            }
+        } else {
+            $(".container1").css({
+                "display": "none"
+            });
+            $(".container2").css({
+                "display": "block"
+            });
+            $(".container3").css({
+                "display": "none"
+            });
+        }
+        return false;
+    })
+    
+     $("#cancel").click(function(){
+        $(".container1").css({
+                "display": "none"
+            });
+            $(".container2").css({
+                "display": "block"
+            });
+            $(".container3").css({
+                "display": "none"
+            });
+            return false;
+     })
+
+    $("#city-picker").cityPicker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">选择地址</h1></header>',
+        rotateEffect: true
+    });
+    </script>
+</body>
+
+</html>

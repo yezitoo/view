@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="css/sm.min.css">
+</head>
+<style type="text/css">
+form {
+    font-size: 16px;
+}
+
+#mon_l {
+    width: 100%;
+    height: 80px;
+}
+
+#mon_r {
+    width: 100%;
+    height: 80px;
+}
+</style>
+
+<body>
+    <form action="">
+        <input type="text" id="mon_l">
+        <input type="text" id="mon_r">
+    </form>
+    <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+    <!-- <script src="js/jquery.js"></script> -->
+    <script>
+    $("#mon_l").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择年/月</h1></header>',
+        cols: [{
+            textAlign: 'center',
+            values: ['2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年', '2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年', '2027年', '2028年', '2029年', '2030年', '2031年', '2032年', '2033年', '2034年', '2035年', '2036年', '2037年', '2038年', '2039年', '2040年', '2041年', '2042年', '2043年', '2044年', '2045年', '2046年', '2047年', '2048年', '2049年', '2050年']
+                //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+        }, {
+            textAlign: 'center',
+            values: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }]
+    });
+    $("#mon_r").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择年/月</h1></header>',
+        cols: [{
+            textAlign: 'center',
+            values: ['2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年', '2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年', '2027年', '2028年', '2029年', '2030年', '2031年', '2032年', '2033年', '2034年', '2035年', '2036年', '2037年', '2038年', '2039年', '2040年', '2041年', '2042年', '2043年', '2044年', '2045年', '2046年', '2047年', '2048年', '2049年', '2050年']
+                //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+        }, {
+            textAlign: 'center',
+            values: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }]
+    });
+
+    var num1, num2;
+    var y = (new Date()).getFullYear();
+    var m = (new Date()).getMonth() + 1;
+    var r = false;
+    $("#mon_l").on("change", function() {
+        num1 = (($("#mon_l").val()).replace(/年/, "")).replace(/月/, "");
+        var fir_y = num1.substr(0, 4);
+        var fir_m = num1.substr(4);
+        // 判断值必须小于等于当前年月
+        // debugger
+        if (fir_y < y) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        } else if (fir_y == y) {
+            if (fir_m <= m) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                $("#mon_l").val("");
+                num1 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+                return
+            }
+        } else {
+            $("#mon_l").val("");
+            num1 = "";
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+            return
+        }
+        // mon_l的值在后面输入的时间大小比较
+        if (r) {
+            var sec_y = num2.substr(0, 4);
+            var sec_m = num2.substr(4);
+            // debugger
+            if ((fir_y > sec_y) && (sec_y != "")) {
+
+                $("#mon_l").val("");
+                num1 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+            } else if (fir_y < sec_y) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ((fir_m > sec_m) && (sec_m != "")) {
+                    $("#mon_l").val("");
+                    num1 = "";
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                    $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+                } else {
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                }
+            }
+        } else {
+            r = true;
+        }
+
+
+    })
+    $("#mon_r").on("change", function() {
+        // debugger
+        num2 = (($("#mon_r").val()).replace(/年/, "")).replace(/月/, "");
+        var sec_y = num2.substr(0, 4);
+        var sec_m = num2.substr(4);
+        // 判断值必须小于等于当前年月
+        if (sec_y < y) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        } else if (sec_y == y) {
+            if (sec_m <= m) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                $("#mon_r").val("");
+                num2 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+                return
+            }
+        } else {
+            $("#mon_r").val("");
+            num2 = "";
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+            return
+        }
+        // mon_r的值在后面输入的时间大小比较
+        if (r) {
+            var fir_y = num1.substr(0, 4);
+            var fir_m = num1.substr(4);
+            if ((fir_y > sec_y) && (fir_y != "")) {
+                $("#mon_r").val("");
+                num2 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+            } else if (fir_y < sec_y) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ((fir_m > sec_m) && (fir_m != "")) {
+                    $("#mon_r").val("");
+                    num2 = "";
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                    $("#mon_r").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+                } else {
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                }
+            }
+        } else {
+            r = true;
+        }
+    })
+    </script>
+</body>
+
+</html>

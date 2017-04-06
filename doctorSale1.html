@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>录入医生销量</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    font-family: 微软雅黑;
+    height: 100%;
+    font-size: 14px;
+    background-color: #eee;
+}
+
+article {
+    background-color: white;
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+#time,
+#name,
+#sale {
+    width: 100%;
+    display: block;
+    padding: 15px 0px 15px 15px;
+    outline: none;
+    border: 1px solid #999;
+    margin-top: 15px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+button {
+    width: 100%;
+    display: block;
+    padding: 15px 0px 15px 0px;
+    outline: none;
+    border: 1px solid #999;
+    margin-top: 15px;
+    box-sizing: border-box;
+    background-color: #2484fb;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 16px;
+    /*-webkit-appearance: none;*/
+}
+
+</style>
+
+<body>
+    <div class="container">
+        <article>
+            <form>
+                <input type="month" id="time">
+                <select id="name" value="医生姓名">
+                    <option value="小花">小花</option>
+                    <option value="小董">小董</option>
+                    <option value="小罗">小罗</option>
+                </select>
+                <input type="text" id="sale" placeholder="销售数量（盒）" pattern="[0-9]">
+                <button>保存</button>
+            </form>
+        </article>
+    </div>
+    <!-- <script src="js/jquery-1.9.1.js"></script> -->
+    <script src="js/jquery.js"></script>
+    <!-- <script src="js/jquery-ui.js"></script> -->
+    <script>
+    $("button").click(function() {
+            // debugger
+            console.log($("#time").val());
+            console.log($("#name").val());
+            console.log($("#sale").val());
+            if (!($("#time").val() && $("#name").val() && $("#sale").val())) {
+
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">内容不能为空</p>');
+            }
+            return false;
+        })
+        // input时时进行输入校验
+    $("#sale").on("input", function(e) {
+        var reg = /^\+?[1-9][0-9]*$/;
+        // debugger
+        if (!reg.test($(this).val())) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">请输入数字</p>');
+            $("#sale").val("");
+        } else {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        }
+
+    });
+
+//动态获取当年时间 yyyy mm 适配ios系统
+    window.onload = onl;
+    function onl() {
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        if (m < 10) {
+            var ym = (y.toString() + "-0" + m.toString()); //时间拼接
+        } else {
+            var ym = (y.toString() + "-" + m.toString()); //时间拼接
+        }
+        $("#time").val(ym);
+        $("#time").css("color","gray");
+    }
+
+    $("#time").on("change", function() {
+        var now = new Date();
+        var date = new Date(Date.parse($(this).val()));
+        if (date.getFullYear() != now.getFullYear() || date.getMonth() > now.getMonth()) {
+            var y = now.getFullYear();
+            var m = now.getMonth() + 1;
+            if (m < 10) {
+                var n = y + "-0" + m;
+                $("#time").val(n);
+            } else {
+                var n = y + "-" + m;
+                $("#time").val(n);
+            }
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">日期只能选择当月或者上个月份</p>');
+        }
+        if (date.getFullYear() != now.getFullYear() || date.getMonth() < (now.getMonth() - 1)) {
+            var y = now.getFullYear();
+            var m = now.getMonth();
+            if (m < 10) {
+                var n = y + "-0" + m;
+                $("#time").val(n);
+            } else {
+                var n = y + "-" + m;
+                $("#time").val(n);
+            }
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">日期只能选择当月或者上个月份</p>');
+        }
+        $("#time").css("color","#333");
+    });
+    </script>
+</body>
+
+</html>

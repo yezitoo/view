@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>录入医生销量</title>
+    <link rel="stylesheet" href="css/sm.min.css">
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container {
+    font-family: 微软雅黑;
+    height: 100%;
+    font-size: 14px;
+    background-color: #eee;
+}
+
+article {
+    background-color: white;
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+#picker-name,
+#name,
+#sale {
+    width: 100%;
+    display: block;
+    padding: 15px 0px 15px 15px;
+    outline: none;
+    border: 1px solid #999;
+    margin-top: 15px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+button {
+    width: 100%;
+    display: block;
+    padding: 15px 0px 15px 0px;
+    outline: none;
+    border: 1px solid #999;
+    margin-top: 15px;
+    box-sizing: border-box;
+    background-color: #2484fb;
+    margin-bottom: 50px;
+    color: white;
+    font-size: 16px;
+    /*-webkit-appearance: none;*/
+}
+</style>
+
+<body>
+    <div class="container">
+        <article>
+            <form>
+                <input type="text" id="picker-name">
+                <select id="name" value="医生姓名">
+                    <option value="小花">小花</option>
+                    <option value="小董">小董</option>
+                    <option value="小罗">小罗</option>
+                </select>
+                <input type="text" id="sale" placeholder="销售数量（盒）" pattern="[0-9]">
+                <button id="save">保存</button>
+            </form>
+        </article>
+    </div>
+    <!-- <script src="js/jquery.js"></script> -->
+    <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+    <script>
+    $("button").click(function() {
+            // debugger
+            console.log($("#picker-name").val());
+            console.log($("#name").val());
+            console.log($("#sale").val());
+            if (!($("#picker-name").val() && $("#name").val() && $("#sale").val())) {
+
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">内容不能为空</p>');
+            }
+            return false;
+        })
+        // input时时进行输入校验
+    $("#sale").on("input", function(e) {
+        var reg = /^\+?[1-9][0-9]*$/;
+        // debugger
+        if (!reg.test($(this).val())) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">请输入数字</p>');
+            $("#sale").val("");
+        } else {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        }
+
+    });
+
+
+    $("#picker-name").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择年/月</h1></header>',
+        cols: [{
+            textAlign: 'center',
+            values: [ '2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年', '2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年', '2027年', '2028年', '2029年', '2030年', '2031年', '2032年', '2033年', '2034年', '2035年', '2036年', '2037年', '2038年', '2039年', '2040年', '2041年', '2042年', '2043年', '2044年', '2045年', '2046年', '2047年', '2048年', '2049年', '2050年']
+                //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+        }, {
+            textAlign: 'center',
+            values: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }]
+    });
+
+    $("#picker-name").on("change", function() {
+        var now = new Date();
+        var y = now.getFullYear();
+        var m = now.getMonth() + 1;
+        var m_1 = now.getMonth();
+        var d = $(this).val();
+        var s = d.replace(/年/, "");
+        var b = s.replace(/月/, "");
+        var c = b.replace(/ /, "");
+        var yn = c.substr(0, 4);
+        var mn = c.substr(4);
+
+        // 判断跨年的情况
+        if (m == 1) {
+            if (yn == y) {
+                var ymn = y + "-0" + "1";
+                $("#picker-name").val(ymn);
+            } else if (yn == (y - 1)) {
+                var ymn = yn + "-" + "12";
+                $("#picker-name").val(ymn);
+            }
+        }
+
+
+        if (mn >= m) {
+            // debugger
+            if (mn < 10) {
+                var ymn = y + "-0" + m;
+                $("#picker-name").val(ymn);
+                // console.log(ymn);
+            } else {
+                var ymn = y + "-" + m;
+                $("#picker-name").val(ymn);
+            }
+
+            if (mn == m) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#save").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">日期只能选择当月或者上个月份</p>');
+                
+            }
+        }
+
+        if (mn <= m_1) {
+            if (mn < 10) {
+                var ymn = y + "-0" + m_1;
+                console.log(ymn);
+                $("#picker-name").val(ymn);
+                // console.log(ymn);
+            } else {
+                var ymn = y + "-" + m_1;
+                $("#picker-name").val(ymn);
+            }
+            if (mn == m_1) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#save").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">日期只能选择当月或者上个月份</p>');
+            }
+        }
+
+
+
+
+    })
+    </script>
+</body>
+
+</html>

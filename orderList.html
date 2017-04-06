@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>订单列表</title>
+</head>
+<style type=text/css>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+article,
+.order {
+    height: 100%;
+    background: #eaedf2;
+}
+
+.container {
+    height: 100%;
+    font-size: 28px;
+    font-family: 微软雅黑;
+    height: 100%;
+    color: #333;
+}
+
+header ul {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    background-color: white;
+}
+
+header ul li {
+    float: left;
+    list-style: none;
+    width: 33.3%;
+    text-align: center;
+}
+
+.line-weight {
+    width: 100%;
+    height: 10px;
+}
+
+.line-light {
+    width: 100%;
+    height: 2px;
+}
+
+.active {
+    color: white;
+    background: #0fcdd9;
+}
+
+.order_status {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background-color: white;
+    padding: 0px 15px;
+    box-sizing: border-box;
+}
+
+.order_status_num {
+    float: left;
+}
+
+.order_status_col {
+    float: right;
+    color: #ff3366;
+}
+
+.order_infor {
+    width: 100%;
+    height: 220px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    background-color: white;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.order_infor_left {
+    float: left;
+    width: 30%;
+}
+
+.order_infor_left img {
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+
+.order_infor_middle {
+    float: left;
+    width: 50%;
+    margin-left: 8px;
+    /*margin-top: 28px;*/
+    font-size: 32px;
+}
+
+.order_infor_right {
+    float: left;
+    width: 15%;
+    text-align: right;
+    margin-top: 28px;
+}
+
+.discount {
+    height: 100px;
+    line-height: 100px;
+    text-align: right;
+    padding: 5px 15px;
+    background-color: white;
+}
+
+.discount span {
+    color: #ff3366;
+}
+
+.total {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 0px 15px;
+}
+
+.total_left {
+    float: left;
+    width: 50%;
+}
+
+.total_right {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.total_right a {
+    text-decoration: none;
+    padding: 20px 16px;
+}
+
+.order_btn_delete {
+    color: red;
+    border: 1px solid red;
+}
+
+.order_btn_pay {
+    color: #ff3366;
+    border: 1px solid #ff3366;
+}
+
+.order_btn_cancel,
+.order_btn_cargo {
+    border: 1px solid black;
+    color: black;
+}
+
+.order-all {
+    display: none;
+    height: 100%;
+}
+
+.order_infor_plan {
+    font-size: 32px;
+}
+
+.order_infor_middle_bottom {
+    margin-top: 48px;
+    color: #666;
+    font-size: 28px;
+}
+
+.show {
+    display: block;
+}
+
+.ui-loader-default {
+    display: none
+}
+
+.ui-mobile-viewport {
+    border: none;
+}
+
+.ui-page {
+    padding: 0;
+    margin: 0;
+    outline: 0
+}
+.order_btn_pay{
+    margin-left:10px;
+}
+</style>
+
+<body>
+    <div class="container">
+        <header>
+            <ul>
+                <li class="active">全部</li>
+                <li>未支付</li>
+                <li>已支付</li>
+            </ul>
+        </header>
+        <article>
+            <div class="order">
+                <div class="order-all show">
+                    <div class="line-weight"></div>
+                    <div class="order_status">
+                        <span class="order_status_num">订单号：1111213</span>
+                        <span class="order_status_col">已完成</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="order_infor">
+                        <div class="order_infor_left">
+                            <img src="images/20170322154959.png">
+                        </div>
+                        <div class="order_infor_middle">
+                            <p class="order_infor_plan">视界镜片阳光计划A</p>
+                            <div class="order_infor_middle_bottom">
+                                <p>左眼100度 4盒</p>
+                                <p>右眼100度 0盒</p>
+                            </div>
+                        </div>
+                        <div class="order_infor_right">
+                            <p>￥0.01</p>
+                            <p>x3</p>
+                        </div>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="discount">
+                        优惠金额：<span>-￥0.01</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="total">
+                        <div class="total_left">
+                            <span>共4件商品</span>&nbsp;<span>合计￥0.03</span>
+                        </div>
+                        <div class="total_right">
+                            <a href="" class="order_btn_cargo">物流详情</a>
+                        </div>
+                    </div>
+                    <div class="line-weight"></div>
+                    <div class="order_status">
+                        <span class="order_status_num">订单号：1111213</span>
+                        <span class="order_status_col">未支付</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="order_infor">
+                        <div class="order_infor_left">
+                            <img src="images/20170322154959.png">
+                        </div>
+                        <div class="order_infor_middle">
+                            <p class="order_infor_plan">视界镜片阳光计划A</p>
+                            <div class="order_infor_middle_bottom">
+                                <p>左眼100度 4盒</p>
+                                <p>右眼100度 0盒</p>
+                            </div>
+                        </div>
+                        <div class="order_infor_right">
+                            <p>￥0.01</p>
+                            <p>x3</p>
+                        </div>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="discount">
+                        优惠金额：<span>-￥0.01</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="total">
+                        <div class="total_left">
+                            <span>共4件商品</span>&nbsp;<span>合计￥0.03</span>
+                        </div>
+                        <div class="total_right">
+                            <a href="" class="order_btn_cancel">取消订单</a>
+                            <a href="" class="order_btn_pay">&nbsp;&nbsp;去支付&nbsp;&nbsp;</a>
+                        </div>
+                    </div>
+                    <div class="line-weight"></div>
+                    <div class="order_status">
+                        <span class="order_status_num">订单号：1111213</span>
+                        <span class="order_status_col">已支付</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="order_infor">
+                        <div class="order_infor_left">
+                            <img src="images/20170322154959.png">
+                        </div>
+                        <div class="order_infor_middle">
+                            <p class="order_infor_plan">视界镜片阳光计划A</p>
+                            <div class="order_infor_middle_bottom">
+                                <p>左眼100度 4盒</p>
+                                <p>右眼100度 0盒</p>
+                            </div>
+                        </div>
+                        <div class="order_infor_right">
+                            <p>￥0.01</p>
+                            <p>x3</p>
+                        </div>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="discount">
+                        优惠金额：<span>-￥0.01</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="total">
+                        <div class="total_left">
+                            <span>共4件商品</span>&nbsp;<span>合计￥0.03</span>
+                        </div>
+                        <div class="total_right">
+                            <a href="" class="order_btn_cargo">物流详情</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-all">
+                    <div class="line-weight"></div>
+                    <div class="order_status">
+                        <span class="order_status_num">订单号：1111213</span>
+                        <span class="order_status_col">未支付</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="order_infor">
+                        <div class="order_infor_left">
+                            <img src="images/20170322154959.png">
+                        </div>
+                        <div class="order_infor_middle">
+                            <p class="order_infor_plan">视界镜片阳光计划A</p>
+                            <div class="order_infor_middle_bottom">
+                                <p>左眼100度 4盒</p>
+                                <p>右眼100度 0盒</p>
+                            </div>
+                        </div>
+                        <div class="order_infor_right">
+                            <p>￥0.01</p>
+                            <p>x3</p>
+                        </div>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="discount">
+                        优惠金额：<span>-￥0.01</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="total">
+                        <div class="total_left">
+                            <span>共4件商品</span>&nbsp;<span>合计￥0.03</span>
+                        </div>
+                        <div class="total_right">
+                            <a href="" class="order_btn_cancel">取消订单</a>
+                            <a href="" class="order_btn_pay">&nbsp;&nbsp;去支付&nbsp;&nbsp;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-all">
+                    <div class="line-weight"></div>
+                    <div class="order_status">
+                        <span class="order_status_num">订单号：1111213</span>
+                        <span class="order_status_col">已支付</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="order_infor">
+                        <div class="order_infor_left">
+                            <img src="images/20170322154959.png">
+                        </div>
+                        <div class="order_infor_middle">
+                            <p class="order_infor_plan">视界镜片阳光计划A</p>
+                            <div class="order_infor_middle_bottom">
+                                <p>左眼100度 4盒</p>
+                                <p>右眼100度 0盒</p>
+                            </div>
+                        </div>
+                        <div class="order_infor_right">
+                            <p>￥0.01</p>
+                            <p>x3</p>
+                        </div>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="discount">
+                        优惠金额：<span>-￥0.01</span>
+                    </div>
+                    <div class="line-light"></div>
+                    <div class="total">
+                        <div class="total_left">
+                            <span>共4件商品</span>&nbsp;<span>合计￥0.03</span>
+                        </div>
+                        <div class="total_right">
+                            <a href="" class="order_btn_cargo">物流详情</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.min.js"></script>
+    <script type="text/javascript">
+    $("header ul li").each(function(index) {
+        $(this).click(function() {
+            $("header ul li").removeClass("active");
+            $(".order-all").removeClass("show");
+            $("header ul li").eq(index).addClass("active");
+            $(".order-all").eq(index).addClass("show");
+        })
+    })
+    </script>
+</body>
+
+</html>

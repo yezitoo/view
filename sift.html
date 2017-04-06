@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>销量筛选</title>
+    <link rel="stylesheet" href="css/sm.min.css">
+</head>
+<style type="text/css">
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    background: #eeeeee;
+}
+
+.container {
+    font-size: 12px;
+    color: #333;
+    height: 100%;
+    font-family: 微软雅黑;
+}
+
+article {
+    background-color: #fff;
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+}
+
+input,
+select {
+    outline: none;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    /*去除ios默认样式*/
+}
+
+.name,
+.date {
+    font-size: 16px;
+    padding: 20px 0 10px 0;
+}
+
+#name {
+    padding: 15px 0px 15px 15px;
+    width: 100%;
+    font-size:14px;
+}
+
+#mon_l,
+#mon_r {
+    width: 40%;
+    text-align:center;
+    font-size:14px;
+    padding: 15px;
+}
+
+
+/*去除input type=date的默认字体颜色*/
+
+#mon_l,
+#mon_r,
+::-webkit-datetime-edit-text {
+    color: #333;
+}
+
+.date-two {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    position:relative;
+}
+
+.date-two span {
+    padding: 15px;
+    font-size:14px;
+    vertical-align: middle;
+    /*width: 20%;*/
+    text-align: center;
+}
+
+#refer {
+    width: 100%;
+    background-color: #2484fb;
+    margin: 20px 0px 50px 0px;
+    padding: 15px 0px;
+    color: #fff;
+    font-size: 16px;
+}
+.top{
+width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 143px;
+    background: transparent;
+}
+.top1{
+    width: 60px;
+    left: 50%;
+    margin-left: -30px;
+    height: 60px;
+    position:absolute;
+    top: 221px;
+    background: transparent;
+}
+</style>
+
+<body>
+    <div class="container">
+        <article>
+            <form>
+                <label>
+                    <p class="name">病人姓名：</p>
+                    <select type="text" maxlength="5" placeholder="请选择病人姓名" id="name">
+                        <option value="">如花</option>
+                        <option value="">凤姐</option>
+                        <option value="">芙蓉姐</option>
+                    </select>
+                </label>
+                <label>
+                    <p class="date">请选择日期：</p>
+                    <div class="date-two">
+                        <input type="text" name="user_date" id="mon_l">
+                        <span id="test">至</span>
+                        <input type="text" name="user_date" id="mon_r" />
+                    </div>
+                </label>
+                <label>
+                    <input type="button" value="查询" id="refer">
+                </label>
+            </form>
+        </article>
+    </div>
+    <div class="top"></div>
+    <div class="top1"></div>
+    <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+    <script>
+    var num1, num2;
+    var y = (new Date()).getFullYear();
+    var m = (new Date()).getMonth() + 1;
+    window.onload = def();
+
+    function def() {
+        var t = y.toString() + "年 " + m.toString() + "月";
+        // $("#mon_l,#mon_r").attr("value",t);
+        $("#mon_l,#mon_r").val(t);
+        num1 = (($("#mon_l").val()).replace(/年/, "")).replace(/月/, "");
+        num2 = (($("#mon_r").val()).replace(/年/, "")).replace(/月/, "");
+    }
+
+    $("#mon_l").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择年/月</h1></header>',
+        cols: [{
+            textAlign: 'center',
+            values: ['2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年', '2027年', '2028年', '2029年', '2030年', '2031年', '2032年', '2033年', '2034年', '2035年', '2036年', '2037年', '2038年', '2039年', '2040年', '2041年', '2042年', '2043年', '2044年', '2045年', '2046年', '2047年', '2048年', '2049年', '2050年']
+                //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+        }, {
+            textAlign: 'center',
+            values: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }]
+    });
+    $("#mon_r").picker({
+        toolbarTemplate: '<header class="bar bar-nav"><button class="button button-link pull-right close-picker">确定</button><h1 class="title">请选择年/月</h1></header>',
+        cols: [{
+            textAlign: 'center',
+            values: ['2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年', '2025年', '2026年', '2027年', '2028年', '2029年', '2030年', '2031年', '2032年', '2033年', '2034年', '2035年', '2036年', '2037年', '2038年', '2039年', '2040年', '2041年', '2042年', '2043年', '2044年', '2045年', '2046年', '2047年', '2048年', '2049年', '2050年']
+                //如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+        }, {
+            textAlign: 'center',
+            values: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        }]
+    });
+
+
+
+    var r = false;
+    $("#mon_l").on("change", function() {
+        num1 = (($("#mon_l").val()).replace(/年/, "")).replace(/月/, "");
+        var fir_y = num1.substr(0, 4);
+        var fir_m = num1.substr(4);
+        // 判断值必须小于等于当前年月
+        // debugger
+        if (fir_y < y) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        } else if (fir_y == y) {
+            if (fir_m <= m) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                $("#mon_l").val("");
+                num1 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+                return
+            }
+        } else {
+            $("#mon_l").val("");
+            num1 = "";
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+            return
+        }
+        // mon_l的值在后面输入的时间大小比较
+        if (r) {
+            var sec_y = num2.substr(0, 4);
+            var sec_m = num2.substr(4);
+            // debugger
+            if ((fir_y > sec_y) && (sec_y != "")) {
+
+                $("#mon_l").val("");
+                num1 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+            } else if (fir_y < sec_y) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ((fir_m > sec_m) && (sec_m != "")) {
+                    $("#mon_l").val("");
+                    num1 = "";
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                    $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+                } else {
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                }
+            }
+        } else {
+            r = true;
+        }
+
+
+    })
+    $("#mon_r").on("change", function() {
+        // debugger
+        num2 = (($("#mon_r").val()).replace(/年/, "")).replace(/月/, "");
+        var sec_y = num2.substr(0, 4);
+        var sec_m = num2.substr(4);
+        // 判断值必须小于等于当前年月
+        if (sec_y < y) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        } else if (sec_y == y) {
+            if (sec_m <= m) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                $("#mon_r").val("");
+                num2 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+                return
+            }
+        } else {
+            $("#mon_r").val("");
+            num2 = "";
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">不能超过当前的年月</p>');
+            return
+        }
+        // mon_r的值在后面输入的时间大小比较
+        if (r) {
+            var fir_y = num1.substr(0, 4);
+            var fir_m = num1.substr(4);
+            if ((fir_y > sec_y) && (fir_y != "")) {
+                $("#mon_r").val("");
+                num2 = "";
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+                $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+            } else if (fir_y < sec_y) {
+                if ($(".notice")) {
+                    $(".notice").remove();
+                }
+            } else {
+                if ((fir_m > sec_m) && (fir_m != "")) {
+                    $("#mon_r").val("");
+                    num2 = "";
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                    $("#refer").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">起始时间必须小于等于结束时间</p>');
+                } else {
+                    if ($(".notice")) {
+                        $(".notice").remove();
+                    }
+                }
+            }
+        } else {
+            r = true;
+        }
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>医生</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/example.css" />
+    <link rel="stylesheet" href="css/weui.css" />
+</head>
+<style type="text/css">
+/*body{margin: 0;padding: 0;background: #f0f0f0;font-size: 0.9rem;font-family: "Microsoft YaHei", "微软雅黑",sans-serif;}*/
+
+.content-top {
+    width: 100%;
+    height: 3rem;
+}
+
+.content-top-search {
+    width: 100%;
+    height: 2.5rem;
+    padding-top: 0.5rem;
+}
+
+.content-top-search-div {
+    float: left;
+    width: 90%;
+    height: 2rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    border-bottom: 1px solid #d7d7d7;
+    margin: 0 1% 0 3%;
+}
+
+.content-top-search-div-ss {
+    float: left;
+    width: 10%;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    margin: 0 3% 0 1%;
+    font-size: 1.1rem;
+}
+
+.content-top-search input {
+    width: 100%;
+    height: 2rem;
+    -moz-border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    border-radius: 1rem;
+    border: 0;
+    padding-left: 2.4rem;
+}
+
+.content-top-search img {
+    width: auto;
+    height: 1.5rem;
+    padding-left: 0.5rem;
+    z-index: 9999;
+    position: relative;
+    top: -1.8rem;
+}
+
+.content-mid {
+    width: 100%;
+    background: #FFFFFF;
+    display:-webkit-flex;
+    display:flex;
+    -webkit-align-items:center;
+    align-items:center;
+    border-bottom: 1px solid #d7d7d7;
+}
+.line-weight{
+    width: 100%;
+    height: 7px;
+    background: #eaeaea;
+}
+.list-left {
+    float: left;
+    padding: 3%;
+    width: 14%;
+    text-align: center;
+}
+
+.list-pic {
+    width: 90%;
+    height: auto;
+}
+
+.list-mid {
+    float: left;
+    width: 44%;
+    padding: 3%;
+}
+
+.list-right {
+    padding: 3%;
+    float: left;
+    width: 24%;
+    text-align: center;
+}
+
+.list-png {
+    float: right;
+    width: 40%;
+    height: auto;
+    margin-right: 5px;
+}
+
+.list-bot {
+    padding: 3%;
+    width: 94%;
+    margin-top: 1px;
+    margin-bottom: 5px;
+    background: #FFFFFF;
+}
+
+.clear {
+    clear: both;
+}
+
+.weui-search-bar__box {
+    height: 1.8rem;
+    line-height: 1.8rem
+}
+.doctor_name{
+    font-size:20px;
+    color:#333;
+}
+.doctor_job{
+    color:#333;
+}
+.intro{
+    color:#2484fb;
+    font-weight:bold;
+}
+.intro_content{
+    color:#666;
+}
+</style>
+<script type="text/javascript">
+//    function enter()
+//    {
+//        var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+//        if (keyCode == 13)
+//        {
+//            window.location.href = "pt!drPage?drName="+$("#searchWord").val();
+//        }
+//    }
+function drDetail(drNo, isNot) {
+    window.location.href = "pt!drDetail?drNo=" + drNo + "&isNot=" + isNot;
+}
+
+function addDr(drNo) {
+    window.location.href = "pt!bindDr?drNo=" + drNo;
+}
+
+function addTalk(drNo) {
+    window.location.href = "talk!talk?drNo=" + drNo;
+}
+//    function search(){
+//        window.location.href = "pt!opcPage?stName="+$("#searchWord").val();
+//    }
+$(function() {
+    var $searchBar = $('#searchBar'),
+        $searchResult = $('#searchResult'),
+        $searchText = $('#searchText'),
+        $searchInput = $('#searchInput');
+
+    function hideSearchResult() {
+        $searchResult.hide();
+        $searchInput.val('');
+    }
+
+    function cancelSearch() {
+        hideSearchResult();
+        $searchBar.removeClass('weui-search-bar_focusing');
+        $searchText.show();
+    }
+
+    $searchText.on('click', function() {
+        $searchBar.addClass('weui-search-bar_focusing');
+        $searchInput.focus();
+    });
+    $searchInput
+        .on('blur', function() {
+            if (!this.value.length) cancelSearch();
+        })
+        .on('input', function() {
+            if (this.value.length) {
+                $searchResult.show();
+            } else {
+                $searchResult.hide();
+            }
+        });
+});
+</script>
+
+<body>
+    <div class="page__bd search">
+        <div class="weui-search-bar" id="searchBar">
+            <form action="#" class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" name="drName" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div>
+    </div>
+    <div class="content-mid">
+        <div class="list-left" onclick="drDetail(0,1)">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid" onclick="drDetail(0,1)">
+            <span class="doctor_name">张三</span>丨 <span class="doctor_job">儿科</span>
+            <br/>这大医院丨杭州
+        </div>
+        <div class="list-right">
+            <img onclick="addDr()" src="images/doctor_follow.png" class="list-png" />
+            <img onclick="addTalk()" src="images/doctor_consult.png" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot">
+        <span class="intro">简介</span><span class="intro_content">：这是简介 很长的简介</span>
+    </div>
+    <div class="line-weight"></div>
+    <div class="content-mid">
+        <div class="list-left" onclick="drDetail(${a.drNo},1)">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid" onclick="drDetail(${a.drNo},1)">
+             <span class="doctor_name">张三</span>丨 <span class="doctor_job">儿科</span>
+            <br/>这大医院丨杭州
+        </div>
+        <div class="list-right">
+            <img onclick="addDr()" src="images/doctor_follow.png" class="list-png" />
+            <img onclick="addTalk()" src="images/doctor_consult.png" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot">
+        <span class="intro">简介</span><span class="intro_content">：这是简介 很长的简介</span>
+    </div>
+    <div class="line-weight"></div>
+    <div class="content-mid">
+        <div class="list-left" onclick="drDetail(0,1)">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid" onclick="drDetail(0,1)">
+            <span class="doctor_name">张三</span>丨 <span class="doctor_job">儿科</span>
+            <br/>这大医院丨杭州
+        </div>
+        <div class="list-right">
+            <img onclick="addDr()" src="images/doctor_follow.png" class="list-png" />
+            <img onclick="addTalk()" src="images/doctor_consult.png" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot">
+        <span class="intro">简介</span><span class="intro_content">：这是简介 很长的简介</span>
+    </div>
+    <div class="line-weight"></div>
+    <div class="content-mid">
+        <div class="list-left" onclick="drDetail(0,1)">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid" onclick="drDetail(0,1)">
+            <span class="doctor_name">张三</span>丨 <span class="doctor_job">儿科</span>
+            <br/>这大医院丨杭州
+        </div>
+        <div class="list-right">
+            <img onclick="addDr()" src="images/doctor_follow.png" class="list-png" />
+            <img onclick="addTalk()" src="images/doctor_consult.png" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot">
+        <span class="intro">简介</span><span class="intro_content">：这是简介 很长的简介</span>
+    </div>
+    <div class="line-weight"></div>
+    <div class="content-mid">
+        <div class="list-left" onclick="drDetail(0,1)">
+            <img src="images/0002.jpg" class="list-pic" />
+        </div>
+        <div class="list-mid" onclick="drDetail(0,1)">
+            <span class="doctor_name">张三</span>丨 <span class="doctor_job">儿科</span>
+            <br/>这大医院丨杭州
+        </div>
+        <div class="list-right">
+            <img onclick="addDr()" src="images/doctor_follow.png" class="list-png" />
+            <img onclick="addTalk()" src="images/doctor_consult.png" class="list-png" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="list-bot">
+        <span class="intro">简介</span><span class="intro_content">：这是简介 很长的简介</span>
+    </div>
+</body>
+
+</html>

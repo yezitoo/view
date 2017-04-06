@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>录入医生销量</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    .container {
+        font-family: 微软雅黑;
+        height: 100%;
+        font-size: 14px;
+        background-color: #eee;
+    }
+
+    article {
+        background-color: white;
+    }
+
+    form {
+        width: 90%;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    #time,
+    #name,
+    #sale {
+        width: 100%;
+        display: block;
+        padding: 15px 0px 15px 15px;
+        outline: none;
+        border: 1px solid #999;
+        margin-top: 15px;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+    }
+
+    button {
+        width: 100%;
+        display: block;
+        padding: 15px 0px 15px 0px;
+        outline: none;
+        border: 1px solid #999;
+        margin-top: 15px;
+        box-sizing: border-box;
+        background-color: #2484fb;
+        margin-bottom: 50px;
+        color: white;
+        font-size: 16px;
+        /*-webkit-appearance: none;*/
+    }
+</style>
+
+<body>
+<div class="container">
+    <article>
+        <form>
+            <input type="text" id="time" placeholder="请选择/年/月">
+            <select id="name" value="医生姓名">
+                <option value="小花">小花</option>
+                <option value="小董">小董</option>
+                <option value="小罗">小罗</option>
+            </select>
+            <input type="text" id="sale" placeholder="销售数量（盒）" pattern="[0-9]">
+            <button>保存</button>
+        </form>
+    </article>
+</div>
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script>
+    $("button").click(function () {
+        // debugger
+        console.log($("#time").val());
+        console.log($("#name").val());
+        console.log($("#sale").val());
+        if (!($("#time").val() && $("#name").val() && $("#sale").val())) {
+
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">内容不能为空</p>');
+        }
+        return false;
+    });
+    // input时时进行输入校验
+    $("#sale").on("input", function (e) {
+        var reg = /^\+?[1-9][0-9]*$/;
+        // debugger
+        if (!reg.test($(this).val())) {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+            $("button").before('<p style="width:100%;height:20px;color:red;line-height:20px" class="notice">请输入数字</p>');
+            $("#sale").val("");
+        } else {
+            if ($(".notice")) {
+                $(".notice").remove();
+            }
+        }
+
+    });
+
+    function getMonthDays(myMonth) {
+        var now = new Date();
+        var monthStartDate = new Date(now.getFullYear(), myMonth, 1);
+        var monthEndDate = new Date(now.getFullYear(), myMonth + 1, 1);
+        var days = (monthEndDate - monthStartDate) / (1000 * 60 * 60 * 24);
+        return days;
+    }
+
+    $(function () {
+        var myDate = new Date();
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        var day = myDate.getDate();
+        var d_this = getMonthDays(month-1);
+        var d_before = getMonthDays(month - 2);
+        var min = d_before + day;
+
+        $("#time").datepicker({
+            minDate: 1 - min,
+            maxDate: d_this - day,
+            dateFormat: 'yy-MM'
+        });
+    });
+    jQuery(function ($) {
+        $.datepicker.regional['zh-CN'] = {
+            closeText: '关闭',
+            prevText: '<上月',
+            nextText: '下月>',
+            currentText: '今天',
+            monthNames: ['01月', '02', '03', '04', '五月', '六月',
+                '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            monthNamesShort: ['一', '二', '三月', '四', '五', '六',
+                '七', '八', '九', '十', '十一', '十二'],
+            dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+            dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+            weekHeader: '周',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: true,
+            yearSuffix: '年',
+            monthSuffix: 'yue'
+        };
+        $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+    });
+</script>
+</body>
+
+</html>
